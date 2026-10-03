@@ -1,11 +1,20 @@
 require("dotenv").config();
-const authRoutes = require("./routes/authRoutes");
+
 const express = require("express");
+const cors = require("cors");
+const authRoutes = require("./routes/authRoutes");
 const pool = require("./config/database");
 
 const app = express();
 
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+
 app.use(express.json());
+
 app.use("/auth", authRoutes);
 
 app.get("/health", async (req, res) => {
