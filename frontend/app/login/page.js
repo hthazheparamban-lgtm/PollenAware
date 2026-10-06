@@ -27,11 +27,14 @@ export default function LoginPage() {
       throw new Error(data.message || "Login failed");
     }
 
-    localStorage.setItem("token", data.token);
+    console.log("LOGIN RESPONSE:", data);
+console.log("TOKEN:", data.token);
 
-    console.log("Login successful:", data);
+localStorage.setItem("token", data.token);
 
-    window.location.href = "/dashboard";
+console.log("SAVED TOKEN:", localStorage.getItem("token"));
+
+window.location.href = "/dashboard";
   } catch (error) {
     console.error("Login error:", error);
     alert(error.message);
