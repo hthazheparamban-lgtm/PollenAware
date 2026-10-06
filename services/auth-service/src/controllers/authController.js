@@ -16,16 +16,13 @@ const register = async (req, res) => {
       });
     }
 
-    const user = await authService.registerUser(
-      userId,
-      email,
-      password
-    );
+    const loginResult = await authService.loginUser(email, password);
 
-    res.status(201).json({
-      message: "User registered successfully",
-      user,
-    });
+res.status(200).json({
+  message: "Login successful",
+  user: loginResult.user,
+  token: loginResult.token,
+});;
   } catch (error) {
     if (error.message === "Email already registered") {
       return res.status(409).json({
@@ -51,11 +48,12 @@ const login = async (req, res) => {
       });
     }
 
-    const user = await authService.loginUser(email, password);
+    const loginResult = await authService.loginUser(email, password);
 
     res.status(200).json({
       message: "Login successful",
-      user,
+      user: loginResult.user,
+      token: loginResult.token,
     });
   } catch (error) {
     if (error.message === "Invalid email or password") {
