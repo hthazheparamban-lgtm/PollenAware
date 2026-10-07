@@ -83,33 +83,69 @@ setUser(data.user);
         )}
 
         <div className="mt-8 grid gap-6 md:grid-cols-3">
-          <div className="rounded-2xl bg-white p-6 shadow-sm">
-            <h3 className="font-semibold text-slate-900">
-              Allergy Profile
-            </h3>
-            <p className="mt-2 text-sm text-slate-500">
-              Manage your allergy information.
-            </p>
-          </div>
+  <a
+    href="/dashboard/allergy"
+    className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+  >
+    <h3 className="font-semibold text-slate-900">
+      Allergy Profile
+    </h3>
 
-          <div className="rounded-2xl bg-white p-6 shadow-sm">
-            <h3 className="font-semibold text-slate-900">
-              Environmental Data
-            </h3>
-            <p className="mt-2 text-sm text-slate-500">
-              View pollen and weather conditions.
-            </p>
-          </div>
+    <p className="mt-2 text-sm text-slate-500">
+      Manage your allergy information.
+    </p>
 
-          <div className="rounded-2xl bg-white p-6 shadow-sm">
-            <h3 className="font-semibold text-slate-900">
-              Risk Assessment
-            </h3>
-            <p className="mt-2 text-sm text-slate-500">
-              Check your personalised allergy risk.
-            </p>
-          </div>
-        </div>
+    <p className="mt-4 text-sm font-semibold text-blue-600">
+      Manage Profile →
+    </p>
+  </a>
+
+  <a
+    href="/dashboard/environmental"
+    className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+  >
+    <h3 className="font-semibold text-slate-900">
+      Environmental Data
+    </h3>
+
+    <p className="mt-2 text-sm text-slate-500">
+      View pollen and weather conditions.
+    </p>
+
+    <p className="mt-4 text-sm font-semibold text-blue-600">
+      View Environmental Data →
+    </p>
+  </a>
+
+ <a
+  href="/dashboard/risk-assessment"
+  className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+>
+  <h3 className="font-semibold text-slate-900">
+    Risk Assessment
+  </h3>
+
+  <p className="mt-2 text-sm text-slate-500">
+    Check your personalised allergy risk.
+  </p>
+
+  <p className="mt-4 text-sm font-semibold text-blue-600">
+    Calculate Risk →
+  </p>
+</a>
+<a
+  href="/dashboard/notifications"
+  className="rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md"
+>
+  <h3 className="font-semibold text-slate-900">
+    Notifications
+  </h3>
+
+  <p className="mt-2 text-sm text-slate-500">
+    View your allergy risk alerts and notifications.
+  </p>
+</a>
+</div>
       </section>
     </main>
   );
