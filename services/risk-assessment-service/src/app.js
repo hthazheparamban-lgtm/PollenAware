@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const riskAssessmentRoutes = require("./routes/riskAssessmentRoutes");
+const cors = require("cors");
 
 const { connectRabbitMQ } = require("./messaging/rabbitmq");
 const {
@@ -9,7 +10,7 @@ const {
 } = require("./messaging/eventConsumer");
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 // Routes

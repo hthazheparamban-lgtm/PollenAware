@@ -25,20 +25,55 @@ const createRiskAssessment = async ({
   latitude,
   longitude,
 }) => {
-  const allergyResponse = await axios.get(
+  let allergyResponse;
+
+try {
+  allergyResponse = await axios.get(
     `${USER_SERVICE_URL}/users/${userId}/allergies`
   );
 
-  const environmentalResponse =
-    await axios.get(
-      `${ENVIRONMENTAL_SERVICE_URL}/environmental-data/external`,
-      {
-        params: {
-          latitude,
-          longitude,
-        },
-      }
-    );
+ 
+} catch (error) {
+  console.error(
+    "ALLERGY REQUEST FAILED:",
+    error.response?.status,
+    error.response?.data || error.message
+  );
+
+  throw error;
+}
+
+  let environmentalResponse;
+
+try {
+  environmentalResponse = await axios.get(
+    `${ENVIRONMENTAL_SERVICE_URL}/environmental-data/external`,
+    {
+      params: {
+        latitude,
+        longitude,
+      },
+    }
+  );
+
+  console.log(
+    "ENVIRONMENTAL RESPONSE STATUS:",
+    environmentalResponse.status
+  );
+
+  console.log(
+    "ENVIRONMENTAL RESPONSE DATA:",
+    environmentalResponse.data
+  );
+} catch (error) {
+  console.error(
+    "ENVIRONMENTAL REQUEST FAILED:",
+    error.response?.status,
+    error.response?.data || error.message
+  );
+
+  throw error;
+}
 
   const allergies =
     allergyResponse.data.allergies || [];
@@ -46,14 +81,26 @@ const createRiskAssessment = async ({
   const environmentalData =
     environmentalResponse.data;
 
-  const { riskScore, riskLevel } =
-    calculateRisk(
-      allergies,
-      environmentalData
-    );
+ let riskResult;
+
+try {
+  riskResult = calculateRisk(
+    allergies,
+    environmentalData
+  );
+
+ 
+} catch (error) {
+
+
+  throw error;
+}
+
+const { riskScore, riskLevel } = riskResult;
 
   const assessment =
     await riskAssessmentRepository.createRiskAssessment({
+      
       userId,
       latitude,
       longitude,
