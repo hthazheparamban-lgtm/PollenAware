@@ -16,15 +16,15 @@ const register = async (req, res) => {
       });
     }
 
-    const user = await authService.registerUser(
+    const authUser = await authService.registerUser(
       userId,
       email,
       password
     );
 
-    res.status(201).json({
-      message: "User registered successfully",
-      user,
+    return res.status(201).json({
+      message: "Registration successful",
+      user: authUser,
     });
   } catch (error) {
     if (error.message === "Email already registered") {
@@ -33,9 +33,9 @@ const register = async (req, res) => {
       });
     }
 
-    console.error("Registration failed:", error.message);
+    console.error("Registration failed:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       message: "Registration failed",
     });
   }
@@ -51,11 +51,12 @@ const login = async (req, res) => {
       });
     }
 
-    const user = await authService.loginUser(email, password);
+    const loginResult = await authService.loginUser(email, password);
 
     res.status(200).json({
       message: "Login successful",
-      user,
+      user: loginResult.user,
+      token: loginResult.token,
     });
   } catch (error) {
     if (error.message === "Invalid email or password") {

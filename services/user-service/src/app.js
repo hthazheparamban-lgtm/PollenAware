@@ -3,6 +3,7 @@ const express = require("express");
 const preferencesRoutes = require("./routes/preferencesRoutes");
 const allergyRoutes = require("./routes/allergyRoutes");
 const { connectRabbitMQ } = require("./config/rabbitmq");
+const cors = require("cors");
 require("dotenv").config();
 
 const pool = require("./config/database");
@@ -11,9 +12,16 @@ const app = express();
 
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+
 app.use("/users", userRoutes);
 app.use("/users", allergyRoutes);
 app.use("/users", preferencesRoutes);
+
 
 app.get("/health", async (req, res) => {
   try {
