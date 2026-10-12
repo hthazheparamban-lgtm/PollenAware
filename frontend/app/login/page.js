@@ -23,16 +23,13 @@ export default function LoginPage() {
 
     const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(data.message || "Login failed");
-    }
+   if (!response.ok) {
+  throw new Error(data.message || "Login failed");
+}
 
-    console.log("LOGIN RESPONSE:", data);
-console.log("TOKEN:", data.token);
 
 localStorage.setItem("token", data.token);
 
-console.log("SAVED TOKEN:", localStorage.getItem("token"));
 
 window.location.href = "/dashboard";
   } catch (error) {

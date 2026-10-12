@@ -56,15 +56,6 @@ try {
     }
   );
 
-  console.log(
-    "ENVIRONMENTAL RESPONSE STATUS:",
-    environmentalResponse.status
-  );
-
-  console.log(
-    "ENVIRONMENTAL RESPONSE DATA:",
-    environmentalResponse.data
-  );
 } catch (error) {
   console.error(
     "ENVIRONMENTAL REQUEST FAILED:",

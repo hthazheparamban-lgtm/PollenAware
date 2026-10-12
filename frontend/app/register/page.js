@@ -11,7 +11,10 @@ export default function RegisterPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+if (password.length < 8) {
+  alert("Password must be at least 8 characters");
+  return;
+}
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -57,13 +60,18 @@ const authResponse = await fetch(
   }
 );
 
-      const authData = await authResponse.json();
+     const authData = await authResponse.json();
 
-      if (!authResponse.ok) {
-        throw new Error(
-          authData.message || "Unable to create authentication account"
-        );
-      }
+if (!authResponse.ok) {
+  console.error("Authentication response:", {
+    status: authResponse.status,
+    data: authData,
+  });
+
+  throw new Error(
+    authData.message || JSON.stringify(authData)
+  );
+}
 
       alert("Registration successful");
 
